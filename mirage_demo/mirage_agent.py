@@ -31,6 +31,10 @@ import re
 import subprocess
 import sys
 import time
+import warnings
+
+warnings.filterwarnings("ignore", category=FutureWarning)
+warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 try:
     import google.generativeai as genai

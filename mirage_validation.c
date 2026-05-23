@@ -174,8 +174,6 @@ static void notifier_loop(int notify_fd) {
             continue;
         }
 
-        printf("[parent] intercepted open of \"%s\"\n", path);
-
         const char *fake_path = NULL;
         if (strcmp(path, "/etc/shadow") == 0 || strstr(path, "shadow") != NULL) {
             fake_path = "/tmp/mirage_demo/data/shadow";
@@ -184,6 +182,7 @@ static void notifier_loop(int notify_fd) {
         }
 
         if (fake_path != NULL) {
+            printf("[parent] intercepted open of \"%s\"\n", path);
             printf("\n🛡️  [MIRAGE KERNEL HOOK]: Intercepted openat(\"%s\")\n", path);
             printf("🪄  [MIRAGE ACTION]: Fabricating reality -> Injecting %s\n", fake_path);
 
